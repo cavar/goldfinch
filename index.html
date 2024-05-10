@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect to YouTube</title>
+    <script>
+        window.onload = function() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Redirect to YouTube link
+            var youtubeLink = "https://youtu.be/Kxg7DwJI4gk?si=ISlYQ4DjiOhYgriD";
+
+            // Check if it's an Android or iOS device
+            if (/android/i.test(userAgent)) {
+                window.location.href = "intent://"+ youtubeLink +"#Intent;package=com.google.android.youtube;scheme=https;end;";
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = "youtube://"+ youtubeLink;
+            } else {
+                window.location.href = youtubeLink;
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- You can put a message here if needed -->
+</body>
+</html>

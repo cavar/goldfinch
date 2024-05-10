@@ -6,19 +6,23 @@
     <title>Redirect to YouTube</title>
     <script>
         window.onload = function() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            // Replace this with your YouTube video URL
+            var youtubeVideoURL = "https://youtu.be/Kxg7DwJI4gk?si=ISlYQ4DjiOhYgriD";
 
-            // Replace this with your YouTube video ID
-            var youtubeVideoID = "https://youtu.be/Kxg7DwJI4gk?si=ISlYQ4DjiOhYgriD";
+            // Open in YouTube app if available, otherwise open in browser
+            var androidIntentURL = "intent://"+ youtubeVideoURL +"#Intent;package=com.google.android.youtube;scheme=https;end;";
+            var iOSYouTubeURL = "youtube://"+ youtubeVideoURL;
 
-            // Check if it's an Android or iOS device
-            if (/android/i.test(userAgent)) {
-                window.location.href = "intent://youtu.be/"+ youtubeVideoID +"#Intent;package=com.google.android.youtube;scheme=https;end;";
-            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                window.location.href = "youtube://watch?v="+ youtubeVideoID;
-            } else {
-                window.location.href = "https://www.youtube.com/watch?v="+ youtubeVideoID;
-            }
+            window.location.href = androidIntentURL;
+
+            setTimeout(function() {
+                window.location.href = iOSYouTubeURL;
+            }, 100);
+
+            // Fallback: Open in browser if app not available
+            setTimeout(function() {
+                window.location.href = youtubeVideoURL;
+            }, 1000);
         };
     </script>
 </head>
@@ -26,5 +30,3 @@
     <!-- You can put a message here if needed -->
 </body>
 </html>
-
-Replace "YOUR_YO
